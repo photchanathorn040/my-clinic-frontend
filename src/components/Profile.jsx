@@ -15,7 +15,7 @@ function Profile({ token }) {
       }
 
       // 3. ยิง API request ไปยัง /profile endpoint
-      const response = await fetch('${import.meta.env.VITE_API_URL}/profile', {
+      const response = await fetch('${process.env.VITE_API_URL}/profile', {
         method: 'GET',
         headers: {
           // (สำคัญ) ส่ง token ไปใน header ที่ชื่อ 'x-access-token'

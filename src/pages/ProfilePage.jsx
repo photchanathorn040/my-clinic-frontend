@@ -18,7 +18,7 @@ function ProfilePage() {
 
     const fetchProfile = async () => {
       try {
-        const response = await fetch('${import.meta.env.VITE_API_URL}/api/profile', {
+        const response = await fetch('${process.env.VITE_API_URL}/api/profile', {
           headers: { 'x-access-token': token },
         });
         const data = await response.json();
