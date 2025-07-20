@@ -16,7 +16,7 @@ function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setMessage('Logging in...');
-    const response = await fetch('${process.env.VITE_API_URL}/login', {
+    const response = await fetch('${'https://photchanathornp.pythonanywhere.com'}/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),

@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import styles from '../styles/Form.module.css'; // 1. Import สไตล์ฟอร์มเข้ามา
 import { useTranslation } from 'react-i18next';
+import styles from '../styles/Form.module.css';
 
 function Register() {
   const { t } = useTranslation();
@@ -11,20 +11,13 @@ function Register() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setMessage('Submitting...');
-
-    const response = await fetch('${process.env.VITE_API_URL}/register', {
+    const response = await fetch(`${'https://photchanathornp.pythonanywhere.com'}/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password }),
     });
-
     const data = await response.json();
-
-    if (response.ok) {
-      setMessage(`Success: ${data.message}`);
-    } else {
-      setMessage(`Error: ${data.message}`);
-    }
+    setMessage(data.message);
   };
 
   return (
@@ -33,7 +26,6 @@ function Register() {
       <form onSubmit={handleSubmit}>
         <div className={styles.formGroup}>
           <label>{t('Email')}:</label>
-          {/* โค้ด input ที่หายไป อยู่ตรงนี้ครับ */}
           <input
             type="email"
             value={email}
@@ -44,7 +36,6 @@ function Register() {
         </div>
         <div className={styles.formGroup}>
           <label>{t('Password')}:</label>
-          {/* โค้ด input ที่หายไป อยู่ตรงนี้ครับ */}
           <input
             type="password"
             value={password}
@@ -59,4 +50,5 @@ function Register() {
     </div>
   );
 }
+
 export default Register;

@@ -3,7 +3,7 @@ import Register from '../components/Register';
 
 function RegisterPage() {
   return (
-    <Container>  
+    <Container>
       <Register />
     </Container>
   );
