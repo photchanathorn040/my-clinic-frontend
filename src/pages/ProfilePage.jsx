@@ -18,7 +18,7 @@ function ProfilePage() {
 
     const fetchProfile = async () => {
       try {
-        const response = await fetch('${'https://photchanathornp.pythonanywhere.com'}/api/profile', {
+        const response = await fetch('https://photchanathornp.pythonanywhere.com/api/profile', {
           headers: { 'x-access-token': token },
         });
         const data = await response.json();

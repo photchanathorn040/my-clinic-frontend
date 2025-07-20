@@ -15,7 +15,7 @@ function Profile({ token }) {
       }
 
       // 3. ยิง API request ไปยัง /profile endpoint
-      const response = await fetch('${'https://photchanathornp.pythonanywhere.com'}/profile', {
+      const response = await fetch('https://photchanathornp.pythonanywhere.com/profile', {
         method: 'GET',
         headers: {
           // (สำคัญ) ส่ง token ไปใน header ที่ชื่อ 'x-access-token'

@@ -11,7 +11,7 @@ function Register() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setMessage('Submitting...');
-    const response = await fetch(`${'https://photchanathornp.pythonanywhere.com'}/register`, {
+    const response = await fetch('https://photchanathornp.pythonanywhere.com/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password }),

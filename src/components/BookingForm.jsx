@@ -18,7 +18,7 @@ function BookingForm({ service, onBookingSuccess }) {
       if (!selectedDate) return;
       const dateString = selectedDate.toISOString().split('T')[0];
       try {
-        const response = await fetch(`${'https://photchanathornp.pythonanywhere.com'}/api/available-slots?date=${dateString}`);
+        const response = await fetch('https://photchanathornp.pythonanywhere.com/api/available-slots?date=${dateString}');
         const data = await response.json();
         setAvailableSlots(data);
         setSelectedSlot(null);
@@ -33,7 +33,7 @@ function BookingForm({ service, onBookingSuccess }) {
     if (!selectedSlot) return alert('Please select a time slot.');
 
     try {
-        const response = await fetch('${'https://photchanathornp.pythonanywhere.com'}/api/book', {
+        const response = await fetch('https://photchanathornp.pythonanywhere.com/api/book', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'x-access-token': token },
             body: JSON.stringify({
