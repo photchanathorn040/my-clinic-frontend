@@ -1,0 +1,27 @@
+/* src/styles/theme.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+:root {
+  /* Colors */
+  --primary-color: #6EBDE8;
+  --primary-color-dark: #4a9dcf;
+  --background-color: #f8f9fa;
+  --surface-color: #FFFFFF; /* สีพื้นผิวของ Card หรือกล่องต่างๆ */
+  --text-color-primary: #212529;
+  --text-color-secondary: #6c757d;
+  --border-color: #dee2e6;
+
+  /* --- (เพิ่ม/แก้ไขส่วนนี้) Typography --- */
+  --font-family: 'Inter', sans-serif;
+  --font-weight-normal: 400;
+  --font-weight-bold: 700;
+
+  --font-size-h1: 2.5rem; /* 40px */
+  --font-size-h2: 2rem;   /* 32px */
+  --font-size-h3: 1.5rem; /* 24px */
+  --font-size-p: 1rem;    /* 16px */
+
+  /* Spacing & Borders */
+  --border-radius: 8px;
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}

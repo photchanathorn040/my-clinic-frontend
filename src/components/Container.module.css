@@ -1,0 +1,14 @@
+/* src/components/Container.module.css */
+.container {
+  max-width: 960px; /* เพิ่มความกว้างสูงสุดเล็กน้อยสำหรับจอใหญ่ */
+  margin: 2rem auto;
+  padding: 0 1.5rem; /* เพิ่ม padding ด้านข้าง */
+}
+
+/* กฎสำหรับหน้าจอมือถือ */
+@media (max-width: 768px) {
+  .container {
+    margin: 1rem auto; /* ลดระยะห่างบน-ล่างในจอมือถือ */
+    padding: 0 1rem; /* ลด padding ด้านข้างในจอมือถือ */
+  }
+}

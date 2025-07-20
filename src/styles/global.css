@@ -1,0 +1,40 @@
+/* src/styles/global.css */
+body {
+    margin: 0;
+    font-family: var(--font-family);
+    background-color: var(--background-color);
+    color: var(--text-color-primary);
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+
+  /* --- (เพิ่มส่วนนี้) Typography Styles --- */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: var(--font-weight-bold);
+  color: var(--text-color-primary);
+  margin-top: 0;
+}
+
+h1 { font-size: var(--font-size-h1); }
+h2 { font-size: var(--font-size-h2); }
+h3 { font-size: var(--font-size-h3); }
+p { 
+  font-size: var(--font-size-p);
+  line-height: 1.6; /* เพิ่มความสูงระหว่างบรรทัดให้อ่านง่าย */
+}
+
+/* --- (เพิ่มส่วนนี้) Responsive Typography --- */
+/* กฎสำหรับหน้าจอที่เล็กกว่า 768px */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem; /* ย่อขนาด h1 ในจอมือถือ */
+  }
+  h2 {
+    font-size: 1.5rem; /* ย่อขนาด h2 ในจอมือถือ */
+  }
+  h3 {
+    font-size: 1.25rem; /* ย่อขนาด h3 ในจอมือถือ */
+  }
+}

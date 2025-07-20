@@ -1,0 +1,56 @@
+.bookingContainer {
+    margin-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1.5rem;
+  }
+  
+  .datePickerGroup, .slotGroup {
+    margin-bottom: 1rem;
+  }
+  
+  .slotButtons {
+      margin-top: 0.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+  }
+  
+  .slotButtons button {
+      padding: 8px 12px;
+      border: 1px solid var(--border-color);
+      background-color: var(--surface-color);
+      border-radius: var(--border-radius);
+      cursor: pointer;
+  }
+  
+  .slotButtons button:hover {
+      border-color: var(--primary-color);
+  }
+  
+  .slotButtons button.selected {
+      background-color: var(--primary-color);
+      color: var(--white-color);
+      border-color: var(--primary-color);
+  }
+  
+  .confirmButton {
+      width: 100%;
+      padding: 12px;
+      background-color: var(--primary-color);
+      color: var(--white-color);
+      border: none;
+      border-radius: var(--border-radius);
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.2s ease-in-out;
+  }
+  
+  .confirmButton:hover {
+      background-color: var(--primary-color-dark);
+  }
+  
+  .confirmButton:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+  }

@@ -1,0 +1,12 @@
+/* src/App.module.css */
+.appContainer {
+    display: grid;
+    /* กำหนดให้มี 2 แถว: แถวบนสุด(header)สูงตามเนื้อหา, แถวล่าง(main)ยืดให้เต็มที่ */
+    grid-template-rows: auto 1fr; 
+    min-height: 100vh; /* ทำให้ Layout สูงเต็มหน้าจอเสมอ */
+  }
+  
+  .appMain {
+    /* เราสามารถเพิ่มสไตล์ให้ส่วน main content ที่นี่ได้ในอนาคต */
+    width: 100%;
+  }
