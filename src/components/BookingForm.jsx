@@ -1,14 +1,22 @@
 import { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
-import "react-datepicker/dist/react-datepicker.css"; // Styles for the calendar
+import "react-datepicker/dist/react-datepicker.css";
 import { useAuth } from '../context/AuthContext';
 import { useTranslation } from 'react-i18next';
-import styles from './BookingForm.module.css'; // We'll create this file next
+import styles from './BookingForm.module.css';
 
 function BookingForm({ service, onBookingSuccess }) {
   const { t, i18n } = useTranslation();
   const { token } = useAuth();
-  const [selectedDate, setSelectedDate] = useState(new Date());
+
+  const getTomorrow = () => {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    tomorrow.setHours(0, 0, 0, 0);
+    return tomorrow;
+  };
+
+  const [selectedDate, setSelectedDate] = useState(getTomorrow());
   const [availableSlots, setAvailableSlots] = useState([]);
   const [selectedSlot, setSelectedSlot] = useState(null);
   const [message, setMessage] = useState('');
@@ -18,7 +26,8 @@ function BookingForm({ service, onBookingSuccess }) {
       if (!selectedDate) return;
       const dateString = selectedDate.toISOString().split('T')[0];
       try {
-        const response = await fetch('https://photchanathornp.pythonanywhere.com/api/available-slots?date=${dateString}');
+        // (สำคัญ) สังเกตการใช้ Backtick (`) ไม่ใช่ Single Quote (')
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/available-slots?date=${dateString}`);
         const data = await response.json();
         setAvailableSlots(data);
         setSelectedSlot(null);
@@ -33,7 +42,7 @@ function BookingForm({ service, onBookingSuccess }) {
     if (!selectedSlot) return alert('Please select a time slot.');
 
     try {
-        const response = await fetch('https://photchanathornp.pythonanywhere.com/api/book', {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/book`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'x-access-token': token },
             body: JSON.stringify({
@@ -43,9 +52,11 @@ function BookingForm({ service, onBookingSuccess }) {
             }),
         });
         const data = await response.json();
-        setMessage(data.message);
         if (response.ok) {
+            setMessage(t('Booking created successfully!'));
             onBookingSuccess();
+        } else {
+            setMessage(data.message);
         }
     } catch (error) {
         setMessage("Booking failed. Please try again.");
@@ -60,7 +71,7 @@ function BookingForm({ service, onBookingSuccess }) {
         <DatePicker 
             selected={selectedDate} 
             onChange={(date) => setSelectedDate(date)} 
-            minDate={new Date()} 
+            minDate={getTomorrow()} 
             dateFormat="dd/MM/yyyy"
         />
       </div>
