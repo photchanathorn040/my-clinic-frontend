@@ -11,11 +11,11 @@ function MyBookingsPage() {
   const { token } = useAuth();
 
   useEffect(() => {
-    if (!token) return; // ถ้าไม่มี token ไม่ต้องทำอะไร
+    if (!token) return;
 
     const fetchBookings = async () => {
       try {
-        const response = await fetch('https://photchanathornp.pythonanywhere.com/api/my-bookings', {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/my-bookings`, {
           headers: { 'x-access-token': token },
         });
         const data = await response.json();
@@ -33,7 +33,9 @@ function MyBookingsPage() {
     fetchBookings();
   }, [token]);
 
-  if (loading) return <Container><div>{t('Loading your bookings...')}</div></Container>;
+  if (loading) {
+    return <Container><div>{t('Loading your bookings...')}</div></Container>;
+  }
 
   return (
     <Container>
@@ -42,17 +44,26 @@ function MyBookingsPage() {
         <p>{t('You have no bookings yet.')}</p>
       ) : (
         <div>
-          {bookings.map(booking => (
-            <div key={booking.id} className={styles.card}>
-              <h3>{t('Booking ID')}: {booking.id}</h3>
-              <p><strong>{t('Service')}:</strong> {booking.service_name}</p>
-              {/* แก้ไขบรรทัดนี้ */}
-              <p><strong>{t('Date')}:</strong> {booking.appointment_time}</p>
-            </div>
-          ))}
+          {bookings.map(booking => {
+            const localAppointmentTime = new Date(booking.appointment_time).toLocaleString('th-TH', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit'
+            });
+            return (
+              <div key={booking.id} className={styles.card}>
+                <h3>{t('Booking ID')}: {booking.id}</h3>
+                <p><strong>{t('Service')}:</strong> {booking.service_name}</p>
+                <p><strong>{t('Date')}:</strong> {localAppointmentTime}</p>
+              </div>
+            )
+          })}
         </div>
       )}
     </Container>
   );
 }
+
 export default MyBookingsPage;

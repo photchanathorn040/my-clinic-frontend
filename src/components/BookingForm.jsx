@@ -26,7 +26,6 @@ function BookingForm({ service, onBookingSuccess }) {
       if (!selectedDate) return;
       const dateString = selectedDate.toISOString().split('T')[0];
       try {
-        // (สำคัญ) สังเกตการใช้ Backtick (`) ไม่ใช่ Single Quote (')
         const response = await fetch(`${import.meta.env.VITE_API_URL}/api/available-slots?date=${dateString}`);
         const data = await response.json();
         setAvailableSlots(data);
@@ -78,21 +77,24 @@ function BookingForm({ service, onBookingSuccess }) {
       <div className={styles.slotGroup}>
         <strong>{t('Select Time')}:</strong>
         <div className={styles.slotButtons}>
-            {availableSlots.length > 0 ? availableSlots.map(slot => (
-            <button 
-                key={slot.id} 
-                onClick={() => setSelectedSlot(slot)} 
-                className={selectedSlot?.id === slot.id ? styles.selected : ''}
-            >
-                {slot.time}
-            </button>
-            )) : <p>{t('No available slots for this date.')}</p>}
+            {availableSlots.length > 0 ? availableSlots.map(slot => {
+              const localTime = new Date(slot.time).toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit', hour12: false });
+              return (
+                <button 
+                    key={slot.id} 
+                    onClick={() => setSelectedSlot(slot)} 
+                    className={selectedSlot?.id === slot.id ? styles.selected : ''}
+                >
+                    {localTime}
+                </button>
+              )
+            }) : <p>{t('No available slots for this date.')}</p>}
         </div>
       </div>
       <button onClick={handleBooking} disabled={!selectedSlot} className={styles.confirmButton}>
         {t('Confirm Booking')}
       </button>
-      {message && <p>{message}</p>}
+      {message && <p>{t(message)}</p>}
     </div>
   );
 }
